@@ -69,7 +69,8 @@
 	   </item>
 	   <item android:id="@+id/settings" android:title="Settings"/>
        <item android:id="@+id/reset" android:title="Reset"/>
-       <item android:id="@+id/about" android:title="About"/>
       <item android:id="@+id/takePanos" android:title="Take Panos"/>
+       <item android:id="@+id/about" android:title="About"/>
+      
     </group>
 </menu>
