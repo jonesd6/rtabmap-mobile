@@ -17,6 +17,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.app.AlertDialog;
@@ -2259,6 +2260,13 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			AboutDialog about = new AboutDialog(this);
 			about.setTitle("About RTAB-Map");
 			about.show();
+		}
+		else if(itemId == R.id.takePanos)
+		{
+			Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.street");
+            if (launchIntent != null) {
+                startActivity(launchIntent);//null pointer check in case package name was not found
+            }
 		}
 
 		return true;
