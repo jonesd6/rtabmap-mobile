@@ -2263,7 +2263,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		}
 		else if(itemId == R.id.takePanos)
 		{
-			Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.google.android.street");
+			Intent launchIntent = getPackageManager().getLaunchIntentForPackage("net.sourceforge.opencamera");
             if (launchIntent != null) {
                 startActivity(launchIntent);//null pointer check in case package name was not found
             }
