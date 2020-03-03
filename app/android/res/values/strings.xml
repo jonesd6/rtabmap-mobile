@@ -50,7 +50,7 @@
     <string name="pref_key_remove_button">pref_key_remove_button</string>
     <string name="pref_key_reset_button">pref_key_reset_button</string>
     <string name="pref_key_density">pref_key_density</string>
-    <string name="pref_default_density">"Maximum"</string>
+    <string name="pref_default_density">0</string>
     <string name="pref_key_min_depth">pref_key_min_depth</string>
     <string name="pref_default_min_depth">0</string>
     <string name="pref_key_depth">pref_key_depth</string>
@@ -81,7 +81,7 @@
     <string name="pref_key_update_rate">pref_key_update_rate</string>
     <string name="pref_default_update_rate">1</string>
     <string name="pref_key_max_speed">pref_key_max_speed</string>
-    <string name="pref_default_max_speed">"Medium"</string>
+    <string name="pref_default_max_speed">0</string>
     <string name="pref_key_time_thr">pref_key_time_thr</string>
     <string name="pref_default_time_thr">1000</string>
     <string name="pref_key_mem_thr">pref_key_mem_thr</string>
