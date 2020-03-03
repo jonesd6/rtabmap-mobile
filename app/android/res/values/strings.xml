@@ -44,7 +44,7 @@
     <string name="pref_key_tags">pref_key_tags</string>
     <string name="pref_default_tags">rtabmap 3dscan tango</string>
     <string name="pref_key_rendering">pref_key_rendering</string>
-    <string name="pref_default_rendering">2</string>
+    <string name="pref_default_rendering">0</string>
     <string name="pref_key_open_button">pref_key_open_button</string>
     <string name="pref_key_save_button">pref_key_save_button</string>
     <string name="pref_key_remove_button">pref_key_remove_button</string>
@@ -56,7 +56,7 @@
     <string name="pref_key_depth">pref_key_depth</string>
     <string name="pref_default_depth">2.5</string>
     <string name="pref_key_point_size">pref_key_point_size</string>
-    <string name="pref_default_point_size">10</string>
+    <string name="pref_default_point_size">5</string>
     <string name="pref_key_angle">pref_key_angle</string>
     <string name="pref_default_angle">20</string>
     <string name="pref_key_triangle">pref_key_triangle</string>
@@ -72,7 +72,7 @@
     <string name="pref_key_append">pref_key_append</string>
     <string name="pref_default_append">true</string>
     <string name="pref_key_resolution">pref_key_resolution</string>
-    <string name="pref_default_resolution">false</string>
+    <string name="pref_default_resolution">true</string>
     <string name="pref_key_smoothing">pref_key_smoothing</string>
     <string name="pref_default_smoothing">true</string>
     <string name="pref_key_fisheye">pref_key_fisheye</string>
@@ -81,7 +81,7 @@
     <string name="pref_key_update_rate">pref_key_update_rate</string>
     <string name="pref_default_update_rate">1</string>
     <string name="pref_key_max_speed">pref_key_max_speed</string>
-    <string name="pref_default_max_speed">0</string>
+    <string name="pref_default_max_speed">2</string>
     <string name="pref_key_time_thr">pref_key_time_thr</string>
     <string name="pref_default_time_thr">1000</string>
     <string name="pref_key_mem_thr">pref_key_mem_thr</string>
