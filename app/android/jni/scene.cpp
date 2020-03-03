@@ -504,7 +504,7 @@ int Scene::Render() {
 
 			axis_->SetPosition(position);
 			axis_->SetRotation(rotation);
-			axis_->Render(projectionMatrix, viewMatrix);
+			//axis_->Render(projectionMatrix, viewMatrix);
 		}
 
 		trace_->UpdateVertexArray(position);
