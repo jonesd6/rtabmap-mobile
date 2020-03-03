@@ -11,6 +11,7 @@
     <string name="camera_button">First View</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
+    <string name="take_pano">Take Pano</string>
     <string name="backface_on">Backface</string>
     <string name="backface_off">Backface</string>
     <string name="light_on">Lighting</string>
