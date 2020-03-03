@@ -180,6 +180,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 	private ToggleButton mButtonLighting;
 	private ToggleButton mButtonWireframe;
 	private ToggleButton mButtonBackfaceShown;
+	private Button mButtonTakePano;
 	private Button mButtonCloseVisualization;
 	private Button mButtonSaveOnDevice;
 	private Button mButtonShareOnSketchfab;
@@ -298,6 +299,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		mButtonLighting = (ToggleButton)findViewById(R.id.light_button);
 		mButtonWireframe = (ToggleButton)findViewById(R.id.wireframe_button);
 		mButtonBackfaceShown = (ToggleButton)findViewById(R.id.backface_button);
+		mButtonTakePano = (Button)findViewById(R.id.take_pano_button);
 		mButtonCloseVisualization = (Button)findViewById(R.id.close_visualization_button);
 		mButtonSaveOnDevice = (Button)findViewById(R.id.button_saveOnDevice);
 		mButtonShareOnSketchfab = (Button)findViewById(R.id.button_shareToSketchfab);
@@ -306,6 +308,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		mButtonLighting.setOnClickListener(this);
 		mButtonWireframe.setOnClickListener(this);
 		mButtonBackfaceShown.setOnClickListener(this);
+		mButtonTakePano.setOnClickListener(this);
 		mButtonCloseVisualization.setOnClickListener(this);
 		mButtonSaveOnDevice.setOnClickListener(this);
 		mButtonShareOnSketchfab.setOnClickListener(this);
