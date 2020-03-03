@@ -8,7 +8,7 @@ fi
 prefix=$1
 
 # get rtabmap
-git clone https://github.com/introlab/rtabmap.git rtabmap-tango
+git clone https://github.com/jonesd6/rtabmap.git rtabmap-tango
 
 # tango
 wget 'https://docs.google.com/uc?authuser=0&id=12rHHkYM5k-UnQn-xGXs9JqYWhSXrgJr3&export=download' -O TangoSDK_Ikariotikos_C.zip
