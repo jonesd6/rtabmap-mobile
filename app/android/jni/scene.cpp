@@ -500,7 +500,7 @@ int Scene::Render() {
 			// Set the frustum scale to 4:3, this doesn't necessarily match the physical
 			// camera's aspect ratio, this is just for visualization purposes.
 			frustum_->SetScale(kFrustumScale);
-			frustum_->Render(projectionMatrix, viewMatrix);
+			//frustum_->Render(projectionMatrix, viewMatrix);
 
 			axis_->SetPosition(position);
 			axis_->SetRotation(rotation);
