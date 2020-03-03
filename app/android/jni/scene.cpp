@@ -102,7 +102,7 @@ Scene::Scene() :
 {
 	gesture_camera_ = new tango_gl::GestureCamera();
 	gesture_camera_->SetCameraType(
-	      tango_gl::GestureCamera::kThirdPersonFollow);
+	      tango_gl::GestureCamera::kFirstPerson);
 }
 
 Scene::~Scene() {
