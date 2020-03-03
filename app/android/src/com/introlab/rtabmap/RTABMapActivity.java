@@ -1682,6 +1682,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			mButtonWireframe.setVisibility(View.INVISIBLE);
 			mButtonCloseVisualization.setVisibility(View.INVISIBLE);
 			mButtonSaveOnDevice.setVisibility(View.INVISIBLE);
+			
 			mButtonShareOnSketchfab.setVisibility(View.INVISIBLE);
 			mItemSave.setEnabled(false);
 			mItemExport.setEnabled(false);
@@ -1691,6 +1692,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			mItemReset.setEnabled(false);
 			mItemModes.setEnabled(false);
 			mButtonPause.setVisibility(View.INVISIBLE);
+			mButtonTakePano.setVisibility(View.INVISIBLE);
 			break;
 		case STATE_VISUALIZING:
 			mButtonLighting.setVisibility(mHudVisible && !mItemRenderingPointCloud.isChecked()?View.VISIBLE:View.INVISIBLE);
@@ -1707,6 +1709,8 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			mItemReset.setEnabled(true);
 			mItemModes.setEnabled(true);
 			mButtonPause.setVisibility(mHudVisible && mItemLocalizationMode.isChecked()?View.VISIBLE:View.GONE);
+			mButtonTakePano.setVisibility(mHudVisible && mItemLocalizationMode.isChecked()?View.VISIBLE:View.GONE);
+
 			mItemLocalizationMode.setEnabled(mButtonPause.isChecked());
 			mItemDataRecorderMode.setEnabled(mButtonPause.isChecked());
 			break;
@@ -1725,6 +1729,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			mItemReset.setEnabled(false);
 			mItemModes.setEnabled(false);
 			mButtonPause.setVisibility(View.INVISIBLE);
+			mButtonTakePano.setVisibility(View.INVISIBLE);
 			break;
 		default:
 			mButtonLighting.setVisibility(View.INVISIBLE);
@@ -1740,6 +1745,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			mItemReset.setEnabled(true);
 			mItemModes.setEnabled(true);
 			mButtonPause.setVisibility(mHudVisible?View.VISIBLE:View.INVISIBLE);
+			mButtonTakePano.setVisibility(mHudVisible?View.VISIBLE:View.INVISIBLE);
 			mItemDataRecorderMode.setEnabled(mButtonPause.isChecked());
 			break;
 		}
