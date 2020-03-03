@@ -542,7 +542,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 	    mDeviceToCamera.setValues(values);
 	    mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		
-		setCamera(0);
+		setCamera(2);
 
 		DISABLE_LOG =  !( 0 != ( getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE ) );
 	}
@@ -943,12 +943,12 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			pauseMapping();
 			break;
 
-		//case R.id.take_pano_button:
-			//Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.vtcreator.android360");
-           // if (launchIntent != null) {
-            //    startActivity(launchIntent);//null pointer check in case package name was not found
-           // }
-			//break;
+		case R.id.take_pano_button:
+			Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.vtcreator.android360");
+            if (launchIntent != null) {
+                startActivity(launchIntent);//null pointer check in case package name was not found
+            }
+			break;
 
 		case R.id.light_button:
 			RTABMapLib.setLighting(mButtonLighting.isChecked());
