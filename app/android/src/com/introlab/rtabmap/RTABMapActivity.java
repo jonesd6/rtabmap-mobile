@@ -129,6 +129,13 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 	private boolean mMenuOpened = false;
 	private long mSavedStamp = 0;
 
+	private float pose_x = 0.0f;
+	private float pose_y = 0.0f;
+	private float pose_z = 0.0f;
+	private float poseRoll = 0.0f;
+	private float posePitch = 0.0f;
+	private float poseYaw = 0.0f;
+
 	// UI states
 	private static enum State {
 		STATE_IDLE,
@@ -1290,6 +1297,21 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			final float pitch,
 			final float yaw)
 	{
+
+	    pose_x = x;
+		pose_y = y;
+		pose_z = z;
+		poseRoll = roll;
+		posePitch = pitch;
+		poseYaw = yaw;
+
+		Log.d("DEBUG", String.ValueOf(pose_x) + "  " +
+		               String.ValueOf(pose_y) + "  " +
+		               String.ValueOf(pose_z) + "  " +
+					   String.ValueOf(poseRoll) + "  " +
+					   String.ValueOf(posePitch) + "  " +
+					   String.ValueOf(poseYaw));
+
 		if(!DISABLE_LOG) Log.i(TAG, String.format("updateStatsCallback()"));
 
 		final String[] statusTexts = new String[STATUS_TEXTS_SIZE];
