@@ -542,7 +542,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 	    mDeviceToCamera.setValues(values);
 	    mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		
-		setCamera(1);
+		setCamera(0);
 
 		DISABLE_LOG =  !( 0 != ( getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE ) );
 	}
