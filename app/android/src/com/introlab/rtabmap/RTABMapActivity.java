@@ -941,6 +941,12 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		case R.id.pause_button:
 			pauseMapping();
 			break;
+		case R.id.take_pano_button:
+			Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.vtcreator.android360");
+            if (launchIntent != null) {
+                startActivity(launchIntent);//null pointer check in case package name was not found
+            }
+			break;
 		case R.id.light_button:
 			RTABMapLib.setLighting(mButtonLighting.isChecked());
 			break;
@@ -2264,13 +2270,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			about.setTitle("About RTAB-Map");
 			about.show();
 		}
-		else if(itemId == R.id.takePanos)
-		{
-			Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.vtcreator.android360");
-            if (launchIntent != null) {
-                startActivity(launchIntent);//null pointer check in case package name was not found
-            }
-		}
+		
 
 		return true;
 	}
