@@ -1305,12 +1305,12 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		posePitch = pitch;
 		poseYaw = yaw;
 
-		Log.d("DEBUG", String.ValueOf(pose_x) + "  " +
-		               String.ValueOf(pose_y) + "  " +
-		               String.ValueOf(pose_z) + "  " +
-					   String.ValueOf(poseRoll) + "  " +
-					   String.ValueOf(posePitch) + "  " +
-					   String.ValueOf(poseYaw));
+		Log.d("DEBUG", String.valueOf(pose_x) + "  " +
+		               String.valueOf(pose_y) + "  " +
+		               String.valueOf(pose_z) + "  " +
+					   String.valueOf(poseRoll) + "  " +
+					   String.valueOf(posePitch) + "  " +
+					   String.valueOf(poseYaw));
 
 		if(!DISABLE_LOG) Log.i(TAG, String.format("updateStatsCallback()"));
 
