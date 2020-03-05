@@ -185,6 +185,21 @@ Java_com_introlab_rtabmap_RTABMapLib_setGridRotation(
 {
 	return app.setGridRotation(value);
 }
+
+JNIEXPORT void JNICALL
+Java_com_introlab_rtabmap_RTABMapLib_setFirstPanoPosition(
+		JNIEnv*, jobject)
+{
+	return app.setFirstPanoPosition();
+}
+
+JNIEXPORT void JNICALL
+Java_com_introlab_rtabmap_RTABMapLib_rotatePanoPosition(
+		JNIEnv*, jobject)
+{
+	return app.rotatePanoPosition();
+}
+
 JNIEXPORT void JNICALL
 Java_com_introlab_rtabmap_RTABMapLib_setLighting(
 		JNIEnv*, jobject, bool enabled)

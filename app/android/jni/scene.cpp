@@ -31,12 +31,12 @@
 
 #include "scene.h"
 #include "util.h"
-
+#include <cmath>
 // We want to represent the device properly with respect to the ground so we'll
 // add an offset in z to our origin. We'll set this offset to 1.3 meters based
 // on the average height of a human standing with a Tango device. This allows us
 // to place a grid roughly on the ground for most users.
-const glm::vec3 kHeightOffset = glm::vec3(0.0f, -1.3f, 0.0f);
+const glm::vec3 kHeightOffset = glm::vec3(0.0f, 0.0f, 0.0f);
 
 // Color of the motion tracking trajectory.
 const tango_gl::Color kTraceColor(0.66f, 0.66f, 0.66f);
@@ -76,9 +76,9 @@ Scene::Scene() :
 		box_(0),
 		trace_(0),
 		graph_(0),
-		graphVisible_(false),
-		gridVisible_(false),
-		traceVisible_(false),
+		graphVisible_(true),
+		gridVisible_(true),
+		traceVisible_(true),
 		color_camera_to_display_rotation_(ROTATION_0),
 		currentPose_(0),
 		graph_shader_program_(0),
@@ -493,18 +493,18 @@ int Scene::Render() {
 
 	if(!currentPose_->isNull())
 	{
-		if (gesture_camera_->GetCameraType() != tango_gl::GestureCamera::kFirstPerson)
+		if (gesture_camera_->GetCameraType()/* != tango_gl::GestureCamera::kFirstPerson*/)
 		{
 			frustum_->SetPosition(position);
 			frustum_->SetRotation(rotation);
 			// Set the frustum scale to 4:3, this doesn't necessarily match the physical
 			// camera's aspect ratio, this is just for visualization purposes.
 			frustum_->SetScale(kFrustumScale);
-			//frustum_->Render(projectionMatrix, viewMatrix);
+			frustum_->Render(projectionMatrix, viewMatrix);
 
 			axis_->SetPosition(position);
 			axis_->SetRotation(rotation);
-			//axis_->Render(projectionMatrix, viewMatrix);
+			axis_->Render(projectionMatrix, viewMatrix);
 		}
 
 		trace_->UpdateVertexArray(position);
@@ -584,9 +584,39 @@ void Scene::setOrthoCropFactor(float value)
 {
 	gesture_camera_->SetOrthoCropFactor(value);
 }
+
+void Scene::setFirstPanoPosition() 
+{
+     if(grid_)
+     {    
+
+          glm::vec3 position(currentPose_->x(), currentPose_->y(), currentPose_->z()-1.0f);
+          
+          grid_->SetPosition(position);
+         
+     }
+}
+void Scene::rotatePanoPosition()
+{
+     if(grid_)
+     {    
+          //Rotate the location of the pano grid.
+          glm::vec3 position(grid_->GetPosition());
+          float theta = 0.261799;
+          float x_prime = position[0]*cos(theta) - position[2]*sin(theta);
+          float z_prime = position[0]*sin(theta) + position[2]*cos(theta);
+          glm::vec3 new_position(x_prime, position[1], z_prime);
+          grid_->SetPosition(new_position);
+
+          //Rotate the grid about it's axis
+	  glm::quat rot = glm::rotate(glm::quat(grid_->GetRotation()), -1.0f*theta, glm::vec3(0, 1, 0));
+          grid_->SetRotation(rot);
+     }
+}
 void Scene::setGridRotation(float angleDeg)
 {
-	float angleRad = angleDeg * DEGREE_2_RADIANS;
+	//float angleRad = angleDeg * DEGREE_2_RADIANS;
+        float angleRad = 90.0;
 	if(grid_)
 	{
 		glm::quat rot = glm::rotate(glm::quat(1,0,0,0), angleRad, glm::vec3(0, 1, 0));
@@ -790,10 +820,10 @@ void Scene::addMesh(
 			}
 		}
 
-		if(grid_->GetPosition().y == kHeightOffset.y || grid_->GetPosition().y > height)
-		{
-			grid_->SetPosition(glm::vec3(0,height,0));
-		}
+		//if(grid_->GetPosition().y == kHeightOffset.y || grid_->GetPosition().y > height)
+		//{
+		//	grid_->SetPosition(glm::vec3(0,height,0));
+		//}
 		LOGD("compute min height %f s", time.ticks());
 	}
 }

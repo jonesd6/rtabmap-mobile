@@ -1873,6 +1873,14 @@ void RTABMapApp::setGridRotation(float value)
 {
 	main_scene_.setGridRotation(value);
 }
+void RTABMapApp::setFirstPanoPosition()
+{
+	main_scene_.setFirstPanoPosition();
+}
+void RTABMapApp::rotatePanoPosition()
+{
+	main_scene_.rotatePanoPosition();
+}
 void RTABMapApp::setLighting(bool enabled)
 {
 	main_scene_.setLighting(enabled);

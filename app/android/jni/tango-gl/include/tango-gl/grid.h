@@ -22,7 +22,7 @@
 namespace tango_gl {
 class Grid : public Line {
  public:
-  Grid(float density = 1.0f, int qx = 50, int qy = 50);
+  Grid(float density = 0.01f, int qx = 50, int qy = 70);
 };
 }  // namespace tango_gl
 #endif  // TANGO_GL_GRID_H_

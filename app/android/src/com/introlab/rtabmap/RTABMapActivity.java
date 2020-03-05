@@ -100,7 +100,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 	// Tag for debug logging.
 	public static final String TAG = RTABMapActivity.class.getSimpleName();
 	public static boolean DISABLE_LOG = true;
-
+        private boolean pano_mode = false;
 	// The minimum Tango Core version required from this application.
 	private static final int  MIN_TANGO_CORE_VERSION = 9377;
 
@@ -951,10 +951,15 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			break;
 
 		case R.id.take_pano_button:
-			Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.vtcreator.android360");
-            if (launchIntent != null) {
-                startActivity(launchIntent);//null pointer check in case package name was not found
-            }
+                        if (!pano_mode)
+                        {
+                            pano_mode = true;
+                            RTABMapLib.setFirstPanoPosition();
+                        }
+                        else
+                        {
+                            RTABMapLib.rotatePanoPosition();
+                        }
 			break;
 
 		case R.id.light_button:

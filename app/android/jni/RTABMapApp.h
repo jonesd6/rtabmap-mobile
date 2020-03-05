@@ -121,6 +121,8 @@ class RTABMapApp : public UEventsHandler {
   void setPointSize(float value);
   void setFOV(float angle);
   void setOrthoCropFactor(float value);
+  void setFirstPanoPosition();
+  void rotatePanoPosition();
   void setGridRotation(float value);
   void setLighting(bool enabled);
   void setBackfaceCulling(bool enabled);

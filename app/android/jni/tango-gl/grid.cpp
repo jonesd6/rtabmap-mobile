@@ -31,13 +31,13 @@ Grid::Grid(float density, int qx, int qy) : Line(1.0f, GL_LINES) {
 
   // Horizontal line.
   for (int i = 0; i < (qy + 1); i++) {
-    vec_vertices_.push_back(glm::vec3(-width, 0.0f, -height + i * density));
-    vec_vertices_.push_back(glm::vec3(width, 0.0f, -height + i * density));
+    vec_vertices_.push_back(glm::vec3(-width, -height + i * density, 0.0f));
+    vec_vertices_.push_back(glm::vec3(width, -height + i * density, 0.0f));
   }
 
   for (int i = 0; i < (qx + 1); i++) {
-    vec_vertices_.push_back(glm::vec3(-width + i * density, 0.0f, -height));
-    vec_vertices_.push_back(glm::vec3(-width + i * density, 0.0f, height));
+    vec_vertices_.push_back(glm::vec3(-width + i * density, -height, 0.0f));
+    vec_vertices_.push_back(glm::vec3(-width + i * density, height, 0.0f));
   }
 }
 }  // namespace tango_gl
