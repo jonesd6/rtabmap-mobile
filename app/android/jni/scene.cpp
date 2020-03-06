@@ -67,17 +67,17 @@ const std::string kGraphFragmentShader =
     "}\n";
 
 
-
 Scene::Scene() :
 		gesture_camera_(0),
 		axis_(0),
 		frustum_(0),
 		grid_(0),
+                target_lock_(0),
 		box_(0),
 		trace_(0),
 		graph_(0),
 		graphVisible_(true),
-		gridVisible_(true),
+		gridVisible_(false),
 		traceVisible_(true),
 		color_camera_to_display_rotation_(ROTATION_0),
 		currentPose_(0),
@@ -125,6 +125,7 @@ void Scene::InitGLContent()
 	frustum_ = new tango_gl::Frustum();
 	trace_ = new tango_gl::Trace();
 	grid_ = new tango_gl::Grid();
+        target_lock_ = new tango_gl::Circle();
 	box_ = new BoundingBoxDrawable();
 	currentPose_ = new rtabmap::Transform();
 
@@ -134,6 +135,7 @@ void Scene::InitGLContent()
 	trace_->ClearVertexArray();
 	trace_->SetColor(kTraceColor);
 	grid_->SetColor(kGridColor);
+        target_lock_->SetColor(kTraceColor);
 	grid_->SetPosition(kHeightOffset);
 	box_->SetShader();
 	box_->SetColor(1,0,0);
@@ -158,6 +160,7 @@ void Scene::DeleteResources() {
 		delete frustum_;
 		delete trace_;
 		delete grid_;
+                delete target_lock_;
 		delete currentPose_;
 		delete box_;
 	}
@@ -493,8 +496,8 @@ int Scene::Render() {
 
 	if(!currentPose_->isNull())
 	{
-		if (gesture_camera_->GetCameraType()/* != tango_gl::GestureCamera::kFirstPerson*/)
-		{
+		//if (gesture_camera_->GetCameraType()/* != tango_gl::GestureCamera::kFirstPerson*/)
+		//{
 			frustum_->SetPosition(position);
 			frustum_->SetRotation(rotation);
 			// Set the frustum scale to 4:3, this doesn't necessarily match the physical
@@ -505,7 +508,7 @@ int Scene::Render() {
 			axis_->SetPosition(position);
 			axis_->SetRotation(rotation);
 			axis_->Render(projectionMatrix, viewMatrix);
-		}
+		//}
 
 		trace_->UpdateVertexArray(position);
 		if(traceVisible_)
@@ -514,7 +517,9 @@ int Scene::Render() {
 		}
 
 		if(gridVisible_)
-		{
+		{       target_lock_->SetPosition(position);
+                        target_lock_->SetRotation(rotation); 
+                        target_lock_->Render(projectionMatrix, viewMatrix);
 			grid_->Render(projectionMatrix, viewMatrix);
 		}
 	}
@@ -585,10 +590,12 @@ void Scene::setOrthoCropFactor(float value)
 	gesture_camera_->SetOrthoCropFactor(value);
 }
 
+
 void Scene::setFirstPanoPosition() 
 {
      if(grid_)
      {    
+          gridVisible_ = true;
 
           glm::vec3 position(currentPose_->x(), currentPose_->y(), currentPose_->z()-1.0f);
           
@@ -599,7 +606,7 @@ void Scene::setFirstPanoPosition()
 void Scene::rotatePanoPosition()
 {
      if(grid_)
-     {    
+     {     
           //Rotate the location of the pano grid.
           glm::vec3 position(grid_->GetPosition());
           float theta = 0.261799;

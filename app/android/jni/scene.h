@@ -31,6 +31,7 @@
 #include <tango-gl/trace.h>
 #include <tango-gl/transform.h>
 #include <tango-gl/util.h>
+#include <tango-gl/circle.h>
 
 #include <rtabmap/core/Transform.h>
 #include <rtabmap/core/Link.h>
@@ -164,6 +165,9 @@ class Scene {
 
   // Ground grid.
   tango_gl::Grid* grid_;
+
+  // Target lock.
+  tango_gl::Circle* target_lock_;
 
   // Bounding box
   BoundingBoxDrawable * box_;
