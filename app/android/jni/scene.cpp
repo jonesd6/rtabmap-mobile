@@ -160,7 +160,7 @@ void Scene::DeleteResources() {
 		delete frustum_;
 		delete trace_;
 		delete grid_;
-                delete target_lock_;
+		delete target_lock_;
 		delete currentPose_;
 		delete box_;
 	}

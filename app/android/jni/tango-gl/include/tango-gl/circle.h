@@ -22,7 +22,7 @@
 namespace tango_gl {
 class Circle : public Mesh {
  public:
-  Circle(float radius, int resolution);
+  Circle(float radius = 0.3f, int resolution = 10);
 };
 }  // namespace tango_gl
 #endif  // TANGO_GL_CIRCLE_H_
