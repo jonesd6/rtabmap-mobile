@@ -80,7 +80,9 @@ class Scene {
   void SetCameraType(tango_gl::GestureCamera::CameraType camera_type);
 
   void SetCameraPose(const rtabmap::Transform & pose);
+  void SetTargetPose(const rtabmap::Transform & pose);
   rtabmap::Transform GetCameraPose() const {return currentPose_!=0?*currentPose_:rtabmap::Transform();}
+  rtabmap::Transform GetTargetPose() const {return targetPose_!=0?*targetPose_:rtabmap::Transform();}
   rtabmap::Transform GetOpenGLCameraPose(float * fov = 0) const;
 
   // Touch event passed from android activity. This function only support two
@@ -186,6 +188,7 @@ class Scene {
   std::map<int, PointCloudDrawable*> pointClouds_;
 
   rtabmap::Transform * currentPose_;
+  rtabmap::Transform * targetPose_;
 
   // Shader to display point cloud.
   GLuint graph_shader_program_;

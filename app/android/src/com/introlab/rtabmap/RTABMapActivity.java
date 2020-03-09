@@ -242,7 +242,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 	
 	private AlertDialog mMemoryWarningDialog = null;
 	
-	private final int STATUS_TEXTS_SIZE = 20;
+	private final int STATUS_TEXTS_SIZE = 21;
 	private final int STATUS_TEXTS_POSE_INDEX = 6;
 	private String[] mStatusTexts = new String[STATUS_TEXTS_SIZE];
 	
@@ -1300,7 +1300,13 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			final float z,
 			final float roll,
 			final float pitch,
-			final float yaw)
+			final float yaw,
+                        final float target_x,
+			final float target_y,
+			final float target_z,
+			final float target_roll,
+			final float target_pitch,
+			final float target_yaw)
 	{
 
 	    pose_x = x;
@@ -1414,8 +1420,8 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		statusTexts[index++] = getString(R.string.hypothesis)+(int)(hypothesis*100.0f) +" / " + (int)(Float.parseFloat(mLoopThr)*100.0f) + " (" + (loopClosureId>0?loopClosureId:highestHypId)+")";
 		statusTexts[index++] = getString(R.string.fps)+(int)fps+" Hz";
 		statusTexts[index++] = getString(R.string.distance)+(int)distanceTravelled+" m";
-		statusTexts[index++] = String.format("Pose (x,y,z): %.2f %.2f %.2f", x,y,z);
-			
+		statusTexts[index++] = String.format("%.2f %.2f %.2f %.2f %.2f %.2f     DEVICE", x,y,z,roll, pitch, yaw);
+		statusTexts[index++] = String.format("%.2f %.2f %.2f %.2f %.2f %.2f     TARGET", target_x,target_y,target_z,target_roll,target_pitch,target_yaw);
 		runOnUiThread(new Runnable() {
 				public void run() {
 					updateStatsUI(loopClosureId, inliers, matches, rejected, optimizationMaxError, optimizationMaxErrorRatio, fastMovement!=0, landmarkDetected, statusTexts);

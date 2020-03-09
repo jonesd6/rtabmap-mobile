@@ -3392,12 +3392,18 @@ bool RTABMapApp::handleEvent(UEvent * event)
 		int fastMovement = (int)uValue(bufferedStatsData_, rtabmap::Statistics::kMemoryFast_movement(), 0.0f);
 		int landmarkDetected = (int)uValue(bufferedStatsData_, rtabmap::Statistics::kLoopLandmark_detected(), 0.0f);
 		rtabmap::Transform currentPose = main_scene_.GetCameraPose();
+		rtabmap::Transform targetPose = main_scene_.GetTargetPose();
 		float x=0.0f,y=0.0f,z=0.0f,roll=0.0f,pitch=0.0f,yaw=0.0f;
+		float target_x=0.0f, target_y=0.0f,target_z=0.0f,target_roll=0.0f,target_pitch=0.0f,target_yaw=0.0f;
 		if(!currentPose.isNull())
 		{
 			currentPose.getTranslationAndEulerAngles(x,y,z,roll,pitch,yaw);
 		}
 
+                if(!targetPose.isNull())
+		{
+			targetPose.getTranslationAndEulerAngles(target_x,target_y,target_z,target_roll,target_pitch,target_yaw);
+		}
 		// Call JAVA callback with some stats
 		UINFO("Send statistics to GUI");
 		bool success = false;
@@ -3410,7 +3416,7 @@ bool RTABMapApp::handleEvent(UEvent * event)
 				jclass clazz = env->GetObjectClass(RTABMapActivity);
 				if(clazz)
 				{
-					jmethodID methodID = env->GetMethodID(clazz, "updateStatsCallback", "(IIIIFIIIIIIFIFIFFFFIIFFFFFF)V" );
+					jmethodID methodID = env->GetMethodID(clazz, "updateStatsCallback", "(IIIIFIIIIIIFIFIFFFFIIFFFFFFFFFFFF)V" );
 					if(methodID)
 					{
 						env->CallVoidMethod(RTABMapActivity, methodID,
@@ -3440,7 +3446,13 @@ bool RTABMapApp::handleEvent(UEvent * event)
 								z,
 								roll,
 								pitch,
-								yaw);
+								yaw,
+                                                                target_x,
+								target_y,
+								target_z,
+								target_roll,
+								target_pitch,
+								target_yaw);
 						success = true;
 					}
 				}
