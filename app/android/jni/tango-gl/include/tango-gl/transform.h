@@ -32,6 +32,7 @@ class Transform {
   void SetPosition(const glm::vec3& position);
   glm::vec3 GetPosition() const;
 
+  glm::vec3 GetEulerAngles() const;
   void SetRotation(const glm::quat& rotation);
   glm::quat GetRotation() const;
 
@@ -47,6 +48,7 @@ class Transform {
 
   const Transform* GetParent() const ;
   Transform* GetParent() ;
+
 
  private:
   Transform* parent_;

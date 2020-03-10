@@ -76,6 +76,11 @@ glm::mat4 Transform::GetTransformationMatrix() const {
   }
   return  trans_mat;
 }
+glm::vec3 Transform::GetEulerAngles() const {
+     return position_;
+
+}
+
 
 void Transform::SetParent(Transform* transform) {
   parent_ = transform;
@@ -88,5 +93,6 @@ const Transform* Transform::GetParent() const {
 Transform* Transform::GetParent() {
   return parent_;
 }
+
 
 }  // namespace tango_gl

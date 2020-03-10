@@ -3392,18 +3392,24 @@ bool RTABMapApp::handleEvent(UEvent * event)
 		int fastMovement = (int)uValue(bufferedStatsData_, rtabmap::Statistics::kMemoryFast_movement(), 0.0f);
 		int landmarkDetected = (int)uValue(bufferedStatsData_, rtabmap::Statistics::kLoopLandmark_detected(), 0.0f);
 		rtabmap::Transform currentPose = main_scene_.GetCameraPose();
-		rtabmap::Transform targetPose = main_scene_.GetTargetPose();
-		float x=0.0f,y=0.0f,z=0.0f,roll=0.0f,pitch=0.0f,yaw=0.0f;
-		float target_x=0.0f, target_y=0.0f,target_z=0.0f,target_roll=0.0f,target_pitch=0.0f,target_yaw=0.0f;
+                glm::quat targetRotation = main_scene_.getPanoRotation();
+                Eigen::Quaternionf cameraRotation = currentPose.getQuaternionf();
+		float x=0.0f,y=0.0f,z=0.0f,roll=0.0f,pitch=0.0f,yaw=0.0f, qw=0.0f, qx=0.0f, qy=0.0f, qz=0.0f;
+		float target_x=0.0f, target_y=0.0f,target_z=0.0f, target_qw=0.0f, target_qx=0.0f, target_qy=0.0f, target_qz=0.0f;
 		if(!currentPose.isNull())
 		{
 			currentPose.getTranslationAndEulerAngles(x,y,z,roll,pitch,yaw);
-		}
+                        qw = cameraRotation.w();
+                        qx = cameraRotation.x();
+                        qy = cameraRotation.y();
+                        qz = cameraRotation.z();
+                        target_qw = targetRotation[0];
+                        target_qx = targetRotation[1];
+                        target_qy = targetRotation[2];
+                        target_qz = targetRotation[3];
+                         
+                }
 
-                if(!targetPose.isNull())
-		{
-			targetPose.getTranslationAndEulerAngles(target_x,target_y,target_z,target_roll,target_pitch,target_yaw);
-		}
 		// Call JAVA callback with some stats
 		UINFO("Send statistics to GUI");
 		bool success = false;
@@ -3416,7 +3422,7 @@ bool RTABMapApp::handleEvent(UEvent * event)
 				jclass clazz = env->GetObjectClass(RTABMapActivity);
 				if(clazz)
 				{
-					jmethodID methodID = env->GetMethodID(clazz, "updateStatsCallback", "(IIIIFIIIIIIFIFIFFFFIIFFFFFFFFFFFF)V" );
+					jmethodID methodID = env->GetMethodID(clazz, "updateStatsCallback", "(IIIIFIIIIIIFIFIFFFFIIFFFFFFFFFFFFFFFFF)V" );
 					if(methodID)
 					{
 						env->CallVoidMethod(RTABMapActivity, methodID,
@@ -3444,15 +3450,20 @@ bool RTABMapApp::handleEvent(UEvent * event)
 								x,
 								y,
 								z,
-								roll,
-								pitch,
-								yaw,
+								qw,
+								qx,
+								qy,
+                                                                qz,
+                                                                roll,
+                                                                pitch,
+                                                                yaw,
                                                                 target_x,
 								target_y,
 								target_z,
-								target_roll,
-								target_pitch,
-								target_yaw);
+								target_qw,
+								target_qx,
+								target_qy,
+                                                                target_qz);
 						success = true;
 					}
 				}

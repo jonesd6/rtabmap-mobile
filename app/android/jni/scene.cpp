@@ -587,6 +587,13 @@ void Scene::setOrthoCropFactor(float value)
 }
 
 
+glm::quat Scene::getPanoRotation() {
+     if(grid_)
+     {
+          return grid_->GetRotation();
+     }
+}
+
 void Scene::setFirstPanoPosition() 
 {
      if(grid_)
@@ -596,9 +603,7 @@ void Scene::setFirstPanoPosition()
           glm::vec3 position(currentPose_->x(), currentPose_->y(), currentPose_->z()-1.0f);
           
           grid_->SetPosition(position);
-
-          
-         
+ 
      }
 }
 void Scene::rotatePanoPosition()

@@ -80,7 +80,7 @@ class Scene {
   void SetCameraType(tango_gl::GestureCamera::CameraType camera_type);
 
   void SetCameraPose(const rtabmap::Transform & pose);
-  void SetTargetPose(const rtabmap::Transform & pose);
+  void SetTargetPose(const rtabmap::Transform & target_pose);
   rtabmap::Transform GetCameraPose() const {return currentPose_!=0?*currentPose_:rtabmap::Transform();}
   rtabmap::Transform GetTargetPose() const {return targetPose_!=0?*targetPose_:rtabmap::Transform();}
   rtabmap::Transform GetOpenGLCameraPose(float * fov = 0) const;
@@ -140,6 +140,7 @@ class Scene {
   void setOrthoCropFactor(float value);
   void setFirstPanoPosition();
   void rotatePanoPosition();
+  glm::quat getPanoRotation();
   void setGridRotation(float angleDeg);
   void setLighting(bool enabled) {lighting_ = enabled;}
   void setBackfaceCulling(bool enabled) {backfaceCulling_ = enabled;}

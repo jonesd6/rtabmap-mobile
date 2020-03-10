@@ -1298,15 +1298,20 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			final float x,
 			final float y,
 			final float z,
+                        final float qw,
+                        final float qx,
+                        final float qy,
+                        final float qz,
 			final float roll,
 			final float pitch,
 			final float yaw,
                         final float target_x,
 			final float target_y,
 			final float target_z,
-			final float target_roll,
-			final float target_pitch,
-			final float target_yaw)
+			final float target_qw,
+			final float target_qx,
+			final float target_qy,
+                        final float target_qz)
 	{
 
 	    pose_x = x;
@@ -1420,8 +1425,8 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		statusTexts[index++] = getString(R.string.hypothesis)+(int)(hypothesis*100.0f) +" / " + (int)(Float.parseFloat(mLoopThr)*100.0f) + " (" + (loopClosureId>0?loopClosureId:highestHypId)+")";
 		statusTexts[index++] = getString(R.string.fps)+(int)fps+" Hz";
 		statusTexts[index++] = getString(R.string.distance)+(int)distanceTravelled+" m";
-		statusTexts[index++] = String.format("%.2f %.2f %.2f %.2f %.2f %.2f     DEVICE", x,y,z,roll, pitch, yaw);
-		statusTexts[index++] = String.format("%.2f %.2f %.2f %.2f %.2f %.2f     TARGET", target_x,target_y,target_z,target_roll,target_pitch,target_yaw);
+		statusTexts[index++] = String.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f    DEVICE", x,y,z,qw,qx,qy,qz);
+		statusTexts[index++] = String.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f    TARGET", target_x,target_y,target_z,target_qw,target_qx,target_qy,target_qz);
 		runOnUiThread(new Runnable() {
 				public void run() {
 					updateStatsUI(loopClosureId, inliers, matches, rejected, optimizationMaxError, optimizationMaxErrorRatio, fastMovement!=0, landmarkDetected, statusTexts);
