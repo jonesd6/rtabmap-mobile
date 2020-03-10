@@ -41,6 +41,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.hardware.display.DisplayManager;
@@ -162,6 +163,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 	private long mOnPauseStamp = 0;
 	private boolean mOnPause = false;
 	private Date mDateOnPause = new Date();
+        private Date panoDate = new Date();
 	private long mLastFastMovementNotificationStamp = 0;
 	private boolean mBlockBack = true;
 	private long mFreeMemoryOnStart = 0;
@@ -188,6 +190,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 	private ToggleButton mButtonWireframe;
 	private ToggleButton mButtonBackfaceShown;
 	private Button mButtonTakePano;
+        private Button mButtonSimTargetAcquired;
 	private Button mButtonCloseVisualization;
 	private Button mButtonSaveOnDevice;
 	private Button mButtonShareOnSketchfab;
@@ -203,6 +206,8 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 	private String mMaxFeatures;
 	private String mLoopThr;
 	private String mMinInliers;
+        private String panoPath;
+        private String panoSuffix;
 	private String mMaxOptimizationError;
 	private boolean mGPSSaved = false;
 	private boolean mEnvSensorsSaved = false;
@@ -307,6 +312,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		mButtonWireframe = (ToggleButton)findViewById(R.id.wireframe_button);
 		mButtonBackfaceShown = (ToggleButton)findViewById(R.id.backface_button);
 		mButtonTakePano = (Button)findViewById(R.id.take_pano_button);
+		mButtonSimTargetAcquired = (Button)findViewById(R.id.sim_target_acquired);
 		mButtonCloseVisualization = (Button)findViewById(R.id.close_visualization_button);
 		mButtonSaveOnDevice = (Button)findViewById(R.id.button_saveOnDevice);
 		mButtonShareOnSketchfab = (Button)findViewById(R.id.button_shareToSketchfab);
@@ -472,6 +478,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		{
 			File extStore = Environment.getExternalStorageDirectory();
 			mWorkingDirectory = extStore.getAbsolutePath() + "/" + getString(R.string.app_name) + "/";
+            
 			extStore = new File(mWorkingDirectory);
 			extStore.mkdirs();
 			mWorkingDirectoryHuman = RTABMAP_SDCARD_PATH + getString(R.string.app_name) + "/";
@@ -949,16 +956,17 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 		case R.id.pause_button:
 			pauseMapping();
 			break;
-
 		case R.id.take_pano_button:
                         if (!pano_mode)
                         {
                             pano_mode = true;
                             RTABMapLib.setFirstPanoPosition();
-                        }
-                        else
-                        {
-                            RTABMapLib.rotatePanoPosition();
+                            panoDate = new Date();
+                     
+                            panoSuffix = new SimpleDateFormat("yyMMdd-HHmmss").format(panoDate);
+                            panoPath = mWorkingDirectory + "PANO_" + panoSuffix;
+                            File panoFile = new File(panoPath);
+                            panoFile.mkdirs();
                         }
 			break;
 
@@ -1734,6 +1742,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			mItemModes.setEnabled(false);
 			mButtonPause.setVisibility(View.INVISIBLE);
 			mButtonTakePano.setVisibility(View.INVISIBLE);
+                        mButtonSimTargetAcquired.setVisibility(View.INVISIBLE);
 			break;
 		case STATE_VISUALIZING:
 			mButtonLighting.setVisibility(mHudVisible && !mItemRenderingPointCloud.isChecked()?View.VISIBLE:View.INVISIBLE);
@@ -1752,6 +1761,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			mButtonPause.setVisibility(mHudVisible && mItemLocalizationMode.isChecked()?View.VISIBLE:View.GONE);
 			mButtonTakePano.setVisibility(mHudVisible && mItemLocalizationMode.isChecked()?View.VISIBLE:View.GONE);
 
+			mButtonSimTargetAcquired.setVisibility(mHudVisible && mItemLocalizationMode.isChecked()?View.VISIBLE:View.GONE);
 			mItemLocalizationMode.setEnabled(mButtonPause.isChecked());
 			mItemDataRecorderMode.setEnabled(mButtonPause.isChecked());
 			break;
@@ -1771,6 +1781,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			mItemModes.setEnabled(false);
 			mButtonPause.setVisibility(View.INVISIBLE);
 			mButtonTakePano.setVisibility(View.INVISIBLE);
+                        mButtonSimTargetAcquired.setVisibility(View.INVISIBLE);
 			break;
 		default:
 			mButtonLighting.setVisibility(View.INVISIBLE);
@@ -1787,6 +1798,7 @@ public class RTABMapActivity extends Activity implements OnClickListener, OnItem
 			mItemModes.setEnabled(true);
 			mButtonPause.setVisibility(mHudVisible?View.VISIBLE:View.INVISIBLE);
 			mButtonTakePano.setVisibility(mHudVisible?View.VISIBLE:View.INVISIBLE);
+			mButtonSimTargetAcquired.setVisibility(mHudVisible?View.VISIBLE:View.INVISIBLE);
 			mItemDataRecorderMode.setEnabled(mButtonPause.isChecked());
 			break;
 		}

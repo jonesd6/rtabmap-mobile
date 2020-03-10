@@ -12,6 +12,7 @@
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
     <string name="take_pano">Take Pano</string>
+    <string name="sim_target_acquired">Sim Match</string>
     <string name="backface_on">Backface</string>
     <string name="backface_off">Backface</string>
     <string name="light_on">Lighting</string>

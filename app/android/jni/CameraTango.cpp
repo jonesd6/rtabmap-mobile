@@ -602,7 +602,7 @@ rtabmap::Transform CameraTango::getPoseAtTimestamp(double timestamp)
 
 SensorData CameraTango::captureImage(CameraInfo * info)
 {
-	//LOGI("Capturing image...");
+	LOGI("Capturing image...");
 
 	SensorData data;
 	if(!dataReady_.acquire(1, 2000))
@@ -669,7 +669,6 @@ SensorData CameraTango::captureImage(CameraInfo * info)
 			LOGE("Not supported color format : %d.", tangoColorType);
 			return data;
 		}
-
 		//for(int i=0; i<rgb.cols; ++i)
 		//{
 		//	UERROR("%d,%d,%d", (int)rgb.at<cv::Vec3b>(i)[0], (int)rgb.at<cv::Vec3b>(i)[1], (int)rgb.at<cv::Vec3b>(i)[2]);
@@ -694,6 +693,7 @@ SensorData CameraTango::captureImage(CameraInfo * info)
 			//LOGD("Rectification time=%fs", t.ticks());
 		}
 
+                cv::imwrite("/sdcard/RTAB-Map/current_image_buffer.png", rgb);
 		// Querying the depth image's frame transformation based on the depth image's
 		// timestamp.
 		cv::Mat depth;
