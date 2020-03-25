@@ -162,7 +162,15 @@
         android:paddingBottom="10dp"
         android:progressDrawable="@drawable/custom_seekbar" />
 
-
+    <shape xmlns:android="http://schemas.android.com/apk/res/android" android:id="pano_preview_window">
+        <stroke android:width="2dp" android:color="#FF0000" />
+        <padding android:left="2dp"
+            android:top="2dp"
+            android:right="2dp"
+            android:bottom="2dp" />
+    <corners android:radius="5dp" />
+    <solid android:color="#ffffffff" />   
+</shape>
 
 </RelativeLayout>        
 </RelativeLayout>
